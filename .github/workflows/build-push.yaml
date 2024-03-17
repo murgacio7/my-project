@@ -28,7 +28,7 @@ jobs:
         run: docker build -t project .
 
       - name: Tag Docker image
-        run: docker tag project $ECR_REGISTRY_URL/project:0.02
+        run: docker tag project $ECR_REGISTRY_URL/project:0.0.2
 
       - name: Push Docker image to ECR
         run: docker push $ECR_REGISTRY_URL/project:0.0.2
