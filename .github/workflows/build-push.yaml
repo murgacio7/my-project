@@ -14,7 +14,7 @@ jobs:
 
       - name: Login to AWS ECR
         id: login-ecr
-        run: echo "${{ secrets.AWS_ACCESS_KEY_ID }}\n${{ secrets.AWS_SECRET_ACCESS_KEY }}" | docker login --username AWS --password-stdin ${{ secrets.AWS_REGISTRY_URL }}
+        run: echo "${{ secrets.AWS_ACCESS_KEY_ID }}\n${{ secrets.AWS_SECRET_ACCESS_KEY }}" | docker login --username AWS --password-stdin 405266377051.dkr.ecr.us-east-2.amazonaws.com/project
       
       - name: Build Docker image
         run: docker build -t project .
