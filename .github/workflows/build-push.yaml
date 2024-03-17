@@ -1,0 +1,26 @@
+name: Build and Push Docker Image
+
+on:
+  workflow_dispatch:
+  
+jobs:
+  build_and_push:
+    name: Build and Push Docker Image
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Login to AWS ECR
+        id: login-ecr
+        run: echo "${{ secrets.AWS_ACCESS_KEY_ID }}\n${{ secrets.AWS_SECRET_ACCESS_KEY }}" | docker login --username AWS --password-stdin ${{ secrets.AWS_REGISTRY_URL }}
+      
+      - name: Build Docker image
+        run: docker build -t project .
+
+      - name: Tag Docker image
+        run: docker tag project:0.0.1 ${{ secrets.AWS_REGISTRY_URL }}/project:0.02
+
+      - name: Push Docker image to ECR
+        run: docker push ${{ secrets.AWS_REGISTRY_URL }}/project:0.0.2
