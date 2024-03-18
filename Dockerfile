@@ -1,4 +1,4 @@
-FROM nginx:1.24.0 
+FROM nginx:latest 
 EXPOSE 80
 EXPOSE 100
 CMD ["nginx", "-g", "daemon off;"]
